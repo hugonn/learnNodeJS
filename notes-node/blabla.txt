@@ -1,0 +1,13 @@
+Eai mundao
+ Eai mundao:  KeD Tecnologia
+2Eai mundao:  KeD Tecnologia!
+Eai mundao:  ${user.username} '!'
+Eai caralho: KeD Tecnologia !
+
+Eai caralho: KeD Tecnologia!
+
+Eai caralho: KeD Tecnologia! blabla 19
+Eai caralho: KeD Tecnologia! blabla 19
+Eai caralho: KeD Tecnologia! blabla 19
+Eai caralho: KeD Tecnologia! blabla 19
+Eai caralho: KeD Tecnologia! blabla 19
