@@ -1,47 +1,71 @@
-console.log('Começaani notes.js');
-const fs= require('fs');
+console.log('Starting notes.js');
 
-let fetchNotes = () => {
-    try{
-        var notes = JSON.parse(fs.readFileSync('notes-data.json'));
-        return notes;
-    }catch(e){
-        return [];
-    }   
-}
+const fs = require('fs');
 
-let saveNotes = (notes) =>{
-    fs.writeFileSync('notes-data.json', JSON.stringify(notes));
+var fetchNotes = () => {
+  try {
+    var notesString = fs.readFileSync('notes-data.json');
+    return JSON.parse(notesString);
+  } catch (e) {
+    return [];
+  }
 };
 
-var addNote = (title, body) =>{
-    console.log("Adding note -> ", title, body);
-   
-    var notes = fetchNotes();
-    var note = {
-        title,
-        body
-    };
+var saveNotes = (notes) => {
+  fs.writeFileSync('notes-data.json', JSON.stringify(notes));
+};
 
-    //função que retorna true or false se já existe algum arquivo com mesmo nome 
+var addNote = (title, body) => {
+  var notes = fetchNotes();
+  var note = {
+    title,
+    body
+  };
+  var duplicateNotes = notes.filter((note) => note.title === title);
 
-    // filter é função do array
-    var duplicateNotes = notes.filter((note) => note.title === title);
-
-    if(duplicateNotes.length === 0){
-        notes.push(note);
-        saveNotes(note);
-        return note;
-    }
+  if (duplicateNotes.length === 0) {
+    notes.push(note);
+    saveNotes(notes);
+    return note;
+  }
 };
 
 var getAll = () => {
-    console.log("Getting all notes");
+  return fetchNotes();
 };
 
+var getNote = (title) => {
+  console.log('Getting note', title);
+
+  let notes = fetchNotes();
+
+  let selectedNote = notes.filter((note) => note.title === title);
+
+  return selectedNote[0];
+};
+
+var removeNote = (title) => {
+  console.log('Removing note', title);
+
+  let notes = fetchNotes();
+  // Cria novo array e remove note especifica
+  let filteredNotes = notes.filter((note) => note.title !== title);
+  saveNotes(filteredNotes);
+
+  return notes.length !== filteredNotes.length;
+};
+
+var logNote = (note) =>{
+  console.log('--');
+  // Sintaxe do ES6 para mostrar diretamente os atributos de um objeto
+  console.log(`Title: ${note.title}`);
+  console.log(`Body: ${note.body}`);
+}
+
 module.exports = {
-    addNote,
-    getAll,
-    //getNote,
-    //removeNote
+  addNote,
+  getAll,
+  getNote,
+  removeNote,
+  logNote
 };
