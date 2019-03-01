@@ -2,6 +2,9 @@ const express = require('express'); // Biblioteca web server
 const hbs = require('hbs');
 const fs = require('fs');
 
+//process possui todas as variaveis 
+const port = process.env.PORT || 3000;
+
 let app = express();
 
 hbs.registerPartials(__dirname + '/views/partials');
@@ -65,5 +68,6 @@ app.get('/', (req,res) =>{
 });
 
 // App rodando e escutando em alguma porta. Loop de execução
-app.listen(3000);
-console.log('Server rodando na porta 3000');
+app.listen(port,() => {
+    console.log(`ver rodando na porta ${port}`);
+});
